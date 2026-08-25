@@ -1,8 +1,7 @@
 {
-  "name": "yeke-netlify",
+  "name": "yeke-blog",
   "version": "1.0.0",
-  "private": true,
   "dependencies": {
-    "@netlify/blobs": "^8.1.0"
+    "@netlify/blobs": "^8.0.0"
   }
 }
