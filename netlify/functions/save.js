@@ -11,7 +11,14 @@ exports.handler = async (event) => {
   if (!ALLOWED.includes(body.file)) {
     return { statusCode: 200, body: JSON.stringify({ ok: false, error: "不允许的文件" }) };
   }
-  const store = getStore({ name: "yeke-content" });
+
+  const blobsContext = process.env.NETLIFY_BLOBS_CONTEXT ? JSON.parse(process.env.NETLIFY_BLOBS_CONTEXT) : {};
+  const store = getStore({
+    name: "yeke-content",
+    siteID: blobsContext.siteID,
+    token: blobsContext.token
+  });
+
   await store.set("data:" + body.file, JSON.stringify(body.data));
   return { statusCode: 200, body: JSON.stringify({ ok: true }) };
 };
