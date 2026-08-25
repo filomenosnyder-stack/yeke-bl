@@ -1,7 +1,7 @@
 const { getStore } = require("@netlify/blobs");
 
 exports.handler = async (event) => {
-  const file = event.queryStringParameters.file;
+  const file = event.queryStringParameters.name || event.queryStringParameters.file;
   
   const blobsContext = process.env.NETLIFY_BLOBS_CONTEXT ? JSON.parse(process.env.NETLIFY_BLOBS_CONTEXT) : {};
   const store = getStore({
