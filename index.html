@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>耶克站</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="home">
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">耶克站</a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-page="home">首页</a></li>
+        <li><a href="pages/suibi.html" data-page="suibi">随笔</a></li>
+        <li><a href="pages/xiangfa.html" data-page="xiangfa">想法</a></li>
+        <li><a href="pages/tucao.html" data-page="tucao">吐槽</a></li>
+        <li><a href="pages/oc/index.html" data-page="oc">OC 世界观</a></li>
+        <li><a href="pages/crossdress.html" data-page="crossdress">汉族男性堕落女装照</a></li>
+        <li><a href="pages/friends.html" data-page="friends">友链</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <header class="hero">
+      <img id="avatar" class="avatar" src="assets/images/avatar.jpg" alt="头像" />
+      <div>
+        <h1 id="siteName">耶克站</h1>
+        <div class="slogan" id="slogan">随笔 · 想法 · 吐槽 · OC 世界观</div>
+        <p class="intro" id="intro">这里是耶克个人站，随便了，反正没人看。</p>
+        <div id="heroBtns" style="display:none;margin-top:10px"><button class="btn sm" onclick="showSiteEditor()">编辑资料</button></div>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>站内板块</h2>
+      <div class="plain-list">
+        <a href="pages/suibi.html">随笔</a>
+        <a href="pages/xiangfa.html">想法</a>
+        <a href="pages/tucao.html">吐槽</a>
+        <a href="pages/oc/index.html">OC 世界观</a>
+        <a href="pages/crossdress.html">汉族男性堕落女装照</a>
+        <a href="pages/friends.html">友链</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>最近更新</h2>
+      <div class="post-list" id="recent">
+        <div class="empty-tip">正在加载…</div>
+      </div>
+    </section>
+
+  </main>
+
+    <footer class="footer">
+    <div class="container">
+      © <span class="year">2026</span> 耶克站
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (async function () {
+      // 站点信息
+      const site = await loadJSON("site");
+      if (site) {
+        if (site.name) document.getElementById("siteName").textContent = site.name;
+        if (site.slogan) document.getElementById("slogan").textContent = site.slogan;
+        if (site.intro) document.getElementById("intro").textContent = site.intro;
+        if (site.avatar) document.getElementById("avatar").src = site.avatar;
+      }
+
+      // 编辑模式（改资料要密码）
+      document.getElementById("heroBtns").style.display = isEditMode() ? "block" : "none";
+      const heroEl = document.querySelector(".hero");
+      const bar = document.createElement("div");
+      bar.innerHTML = editBar();
+      if (heroEl && bar.firstChild) {
+        document.querySelector("main").insertBefore(bar.firstChild, heroEl);
+      }
+
+      // 最近更新：汇总各板块最新一条
+      const [suibi, xiangfa, tucao, oc] = await Promise.all([
+        loadJSON("suibi"), loadJSON("xiangfa"), loadJSON("tucao"), loadJSON("oc")
+      ]);
+      const recentBox = document.getElementById("recent");
+
+      const blocks = [];
+      if (suibi && suibi.items && suibi.items.length) {
+        const it = suibi.items[suibi.items.length - 1];
+        blocks.push({ date: it.date, title: it.title, cat: "随笔", href: "pages/suibi.html?id=" + it.id });
+      }
+      if (xiangfa && xiangfa.items && xiangfa.items.length) {
+        const it = xiangfa.items[xiangfa.items.length - 1];
+        blocks.push({ date: it.date, title: it.title, cat: "想法", href: "pages/xiangfa.html?id=" + it.id });
+      }
+      if (tucao && tucao.items && tucao.items.length) {
+        const it = tucao.items[tucao.items.length - 1];
+        blocks.push({ date: it.date, title: it.title, cat: "吐槽", href: "pages/tucao.html?id=" + it.id });
+      }
+      if (oc && oc.series && oc.series.length) {
+        const s = oc.series[0];
+        blocks.push({ date: "", title: s.title, cat: "OC", href: "pages/oc/index.html?series=" + s.id });
+      }
+
+      if (!blocks.length) {
+        recentBox.innerHTML = '<div class="empty-tip">还没有内容，进入编辑模式写一篇吧。</div>';
+        return;
+      }
+      recentBox.innerHTML = blocks.map((b) =>
+        '<div class="post-item" onclick="location.href=\'' + b.href + '\'">' +
+          '<span class="date">' + esc(b.date) + '</span>' +
+          '<span class="title">' + esc(b.title) + '</span>' +
+          '<span class="cat">' + esc(b.cat) + '</span>' +
+        '</div>'
+      ).join("");
+    })();
+
+    // 首页编辑资料
+    function showSiteEditor() {
+      (async () => {
+        const st = (await loadJSON("site")) || {};
+        const hero = document.querySelector(".hero");
+        hero.innerHTML =
+          '<div class="editor" style="width:100%">' +
+            '<a class="back" href="javascript:location.reload()">← 取消</a>' +
+            '<label>站点名称</label><input id="t_name" value="' + esc(st.name) + '" />' +
+            '<label>口号</label><input id="t_slogan" value="' + esc(st.slogan) + '" />' +
+            '<label>简介</label><textarea id="t_intro" rows="3">' + esc(st.intro) + "</textarea>" +
+            '<label>头像路径（图片放 assets/images/ 后填路径）</label><input id="t_avatar" value="' + esc(st.avatar) + '" />' +
+            '<div class="editor-actions">' +
+              '<button class="btn primary" onclick="saveSiteEditor()">保存</button>' +
+              '<button class="btn" onclick="location.reload()">取消</button>' +
+            "</div>" +
+          "</div>";
+      })();
+    }
+    async function saveSiteEditor() {
+      const st = {
+        name: document.getElementById("t_name").value.trim(),
+        slogan: document.getElementById("t_slogan").value.trim(),
+        intro: document.getElementById("t_intro").value.trim(),
+        avatar: document.getElementById("t_avatar").value.trim(),
+        background: "",
+      };
+      const r = await saveData("site", st);
+      if (r && r.ok) location.reload();
+      else alert("保存失败：" + ((r && r.error) || "未知错误"));
+    }
+  </script>
+</body>
+</html>

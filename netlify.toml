@@ -1,0 +1,30 @@
+[build]
+  publish = "."
+
+[build.environment]
+  NETLIFY_BLOBS_CONTEXT = "production"
+
+[[redirects]]
+  from = "/api/save"
+  to = "/.netlify/functions/save"
+  status = 200
+
+[[redirects]]
+  from = "/api/load"
+  to = "/.netlify/functions/load"
+  status = 200
+
+[[redirects]]
+  from = "/api/upload"
+  to = "/.netlify/functions/upload"
+  status = 200
+
+[[redirects]]
+  from = "/api/image"
+  to = "/.netlify/functions/image"
+  status = 200
+
+[[redirects]]
+  from = "/api/verify"
+  to = "/.netlify/functions/verify"
+  status = 200

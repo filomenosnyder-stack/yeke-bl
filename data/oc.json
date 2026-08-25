@@ -1,0 +1,103 @@
+{
+  "series": [
+    {
+      "id": "lysia",
+      "title": "利西亚世界观",
+      "subtitle": "厄尔塔星球 · 利西亚人民共和国",
+      "desc": "",
+      "cover": "",
+      "chapters": [
+        {
+          "title": "00 总纲与一致性基准",
+          "file": "/ocfiles/lysia/00_总纲与一致性基准.md"
+        },
+        {
+          "title": "03 地理与行政区划",
+          "file": "/ocfiles/lysia/03_地理与行政区划.md"
+        },
+        {
+          "title": "05 军事",
+          "file": "/ocfiles/lysia/05_军事.md"
+        },
+        {
+          "title": "05 军事扩充 上部",
+          "file": "/ocfiles/lysia/05_军事扩充_上部.md"
+        },
+        {
+          "title": "05 军事扩充 下部",
+          "file": "/ocfiles/lysia/05_军事扩充_下部.md"
+        },
+        {
+          "title": "05 军事扩充 追加",
+          "file": "/ocfiles/lysia/05_军事扩充_追加.md"
+        },
+        {
+          "title": "05 军事扩充 追加2",
+          "file": "/ocfiles/lysia/05_军事扩充_追加2.md"
+        }
+      ]
+    },
+    {
+      "id": "miliam",
+      "title": "米利暗 —— 魔女存在",
+      "subtitle": "档案：已归档",
+      "desc": "",
+      "cover": "",
+      "chapters": [
+        {
+          "title": "档案索引",
+          "content": "已归档档案 **9** 份，全部为 PDF，可直接在网页内查看。\n\n点击下方章节查看。"
+        },
+        {
+          "title": "CDC-ESIAS-Field-Manual-2022.orig（PDF 原件）",
+          "file": "/ocfiles/miliam/CDC-ESIAS-Field-Manual-2022.orig.pdf"
+        },
+        {
+          "title": "Dossier Alouette Argentee（PDF 原件）",
+          "file": "/ocfiles/miliam/Dossier_Alouette_Argentee.pdf"
+        },
+        {
+          "title": "NHC-SPHS-2020-01-培训手册（PDF 原件）",
+          "file": "/ocfiles/miliam/NHC-SPHS-2020-01-培训手册.pdf"
+        },
+        {
+          "title": "Project PERSEPHONE Integrated Intelligence Assessment (1945–1964)（PDF 原件）",
+          "file": "/ocfiles/miliam/Project PERSEPHONE Integrated Intelligence Assessment (1945–1964).pdf"
+        },
+        {
+          "title": "ROKA 79-1212 UX01（PDF 原件）",
+          "file": "/ocfiles/miliam/ROKA_79-1212_UX01.pdf"
+        },
+        {
+          "title": "UN-EOSG-2025-ESIAS（PDF 原件）",
+          "file": "/ocfiles/miliam/UN-EOSG-2025-ESIAS.pdf"
+        },
+        {
+          "title": "UN-OHAR-GENESIS-I (1)（PDF 原件）",
+          "file": "/ocfiles/miliam/UN-OHAR-GENESIS-I (1).pdf"
+        },
+        {
+          "title": "МЗ-ОФС-2021-02-Методическое-пособие（PDF 原件）",
+          "file": "/ocfiles/miliam/МЗ-ОФС-2021-02-Методическое-пособие.pdf"
+        },
+        {
+          "title": "厚労発特疾第0415号-ESIAS対応マニュアル（PDF 原件）",
+          "file": "/ocfiles/miliam/厚労発特疾第0415号-ESIAS対応マニュアル.pdf"
+        }
+      ]
+    },
+    {
+      "id": "1991",
+      "title": "1991 年北约进军，苏联紧急状态委员会成立",
+      "subtitle": "架空历史 · 建设中",
+      "desc": "",
+      "cover": "",
+      "chapters": [
+        {
+          "title": "设定说明",
+          "content": "本系列世界观尚在建设中。"
+        }
+      ]
+    }
+  ]
+}
